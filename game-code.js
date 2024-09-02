@@ -17,18 +17,30 @@ function getHumanChoice(){
     let choice = null;
     while ( choice===null){
       choice = prompt('Make your choice!');
+      try {
+        if (choices.indexOf(choice.toLowerCase()) < 0){
+          choice=null;
+        }
+      } catch {
+        // quietly handle user-cancel
+        return null;
+      }
     }
     return choice;
 }
 
 function playRound( humanChoice, computerChoice) {
     
-    console.log('Computer: ' + computerChoice + ' vs You: ' + humanChoice )
+    try {
+      humanChoice= humanChoice.toLowerCase();
+    } catch {
+        return false;
+    }
 
-    humanChoice= humanChoice.toLowerCase();
+    console.log('Computer: ' + computerChoice + ' vs You: ' + humanChoice )
     if(humanChoice == computerChoice){
         console.log('No winner...you both chose ' + computerChoice )
-        return;
+        return true;
     }
 
     if(humanChoice=="rock"){
@@ -39,7 +51,7 @@ function playRound( humanChoice, computerChoice) {
             console.log('Rock break scissors...you win!');
             humanScore++;
         }
-        return;
+        return true;
     }
 
     if(humanChoice=="paper"){
@@ -50,7 +62,7 @@ function playRound( humanChoice, computerChoice) {
             console.log('Scissors cut paper...you lose!');
             computerScore++;
         }
-        return;
+        return true;
     }
 
     if(humanChoice=="scissors"){
@@ -61,20 +73,28 @@ function playRound( humanChoice, computerChoice) {
             console.log('Scissors cut paper...you win!');
             humanScore++;
         }
-        return;
+        return true;
     }
     
     console.log('Uh-oh...something went wrong!');
+    return false;
 
 }
 
-// intitial test to make sure things are working
-//console.log("Hello world!");
-//console.log("You chose " + getHumanChoice() );
-//console.log("Computer chose " + getComputerChoice() );
+(function playGame(num_games = 5) {
+  
+  let playAnother = true;
 
-for( let i=1; i<=10; i++) {
-    console.log('---- Round ' + String(i) + '------');
-    playRound( getHumanChoice(), getComputerChoice() );
-    console.log('Computer: ' + String(computerScore) + ' You: ' + String(humanScore) + '\n');
-}
+  for( let i=1; i<=num_games; i++) {
+      console.log(`---- Round ${i} ----`);
+      playAnother = playRound( getHumanChoice(), getComputerChoice() );
+      if (!playAnother) {
+        console.log('You quit!')
+        break
+      }
+      console.log(`Computer: ${computerScore} ... You: ${humanScore} \n`);
+  }
+  
+  console.log(`Final score: Computer: ${computerScore} .... You: ${humanScore} \n`);
+
+})() // play it right away...
