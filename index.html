@@ -3,9 +3,27 @@
     <header>
         <metadata charset="UTF-8"></metadata>
         <title>Rock Paper Scissors</title>
-        <script src="game-code.js"></script>
     </header>
+
     <body>
-        <p>Play the game in the browser console</p> 
+        <!-- <p>Play the game in the browser console</p> -->
+        <div id="container-current-game">
+            <div id="player-buttons">
+                <button id="player-rock" style="background-color:lightgray;">Rock</button>
+                <button id="player-paper" style="background-color:lightgray;">Paper</button>
+                <button id="player-scissors" style="background-color:lightgray;">Scissors</button>
+            </div>
+            <textarea id="computer-selection"></textarea>
+        </div>
+        <div id="container-running-score">
+            <div id="computer-score">
+                <h3>Computer: </h3><a>0</a>
+            </div>
+            <div id="human-score">
+                <h3>You: </h3><a>0</a>
+            </div>
+        </div>
     </body>
+    <script src="game-code.js"></script>
+
 </html>
