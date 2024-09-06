@@ -124,6 +124,11 @@ buttonPlayerScissors.addEventListener( "click", (e)=>{
 const buttonContainer = document.querySelector('#player-buttons');
 buttonContainer.addEventListener( "click", (e)=>{
   
+  // must click on a button, not the button container
+  if (e.target===buttonContainer) {
+    return;
+  }
+
   // reset button colors
   Array.from(buttonContainer.children).forEach( x=>{
     x.style.backgroundColor='lightgray';
@@ -138,18 +143,28 @@ buttonContainer.addEventListener( "click", (e)=>{
     // make sure scoreboard is updated before prompting for another game
     // inspired by: https://stackoverflow.com/questions/8840580
     setTimeout(function() {
+      
       let msg = (computerScore >=5) ? 'The computer' : 'Congrats! You';
       msg = `${msg} won best of five games! Play again?`;
+      
       if (confirm(msg)) {
+        
+        // reset game board
         computerScore=0;
         humanScore=0;
         updateScoreBoard();
+        computerChoiceDiv.textContent='';
+        e.target.style.backgroundColor='lightgray'; 
         return;
+
+      } else {
+
+        // https://stackoverflow.com/questions/15555295/how-to-disable-div-element-and-everything-inside
+        buttonContainer.style.pointerEvents='none';
+        computerChoiceDiv.textContent='Thanks for playing! Reload the page if you want play again later.';
+        
       };
     },0);
-    
-    // https://stackoverflow.com/questions/15555295/how-to-disable-div-element-and-everything-inside
-    buttonContainer.style.pointerEvents='none';
   }
 });
 
