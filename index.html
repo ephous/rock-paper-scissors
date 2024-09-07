@@ -3,6 +3,7 @@
     <header>
         <metadata charset="UTF-8"></metadata>
         <title>Rock Paper Scissors</title>
+        <link rel="stylesheet" href="styles.css">
     </header>
 
     <body>
@@ -16,11 +17,13 @@
             <textarea id="computer-selection"></textarea>
         </div>
         <div id="container-running-score">
-            <div id="computer-score">
-                <h3>Computer: </h3><a>0</a>
+            <div class="scoreboard" id="computer-score">
+                <p class="label">Computer: </p>
+                <p class="score">0</p>
             </div>
-            <div id="human-score">
-                <h3>You: </h3><a>0</a>
+            <div class="scoreboard" id="human-score">
+                <p class="label">You: </p>
+                <p class="score">0</p>
             </div>
         </div>
     </body>

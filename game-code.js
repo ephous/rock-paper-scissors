@@ -51,7 +51,7 @@ function playRound( humanChoice, computerChoice) {
             msg = 'Paper covers rock...you lose!';
             computerScore++;
         } else {
-            msg = 'Rock break scissors...you win!';
+            msg = 'Rock breaks scissors...you win!';
             humanScore++;
         }
         computerChoiceDiv.textContent = msg; // uses hoisting :)
@@ -95,8 +95,8 @@ function updateScoreBoard(){
 /* displays */
 const computerChoiceDiv = document.querySelector('#computer-selection')
 
-const computerScoreBoard = document.querySelector('#computer-score>a')
-const humanScoreBoard = document.querySelector('#human-score>a')
+const computerScoreBoard = document.querySelector('#computer-score>p.score')
+const humanScoreBoard = document.querySelector('#human-score>p.score')
 
 
 /* listeners on each button
